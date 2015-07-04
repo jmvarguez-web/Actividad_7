@@ -12,7 +12,14 @@ class MenuController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Cell height.
+        self.tableView.rowHeight = 50
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.backgroundView = UIImageView(image: UIImage(named: "fondo2"))
 
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -30,17 +37,26 @@ class MenuController: UITableViewController {
     // MARK: - Table view data source
 
 
-    /*
+   /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
 
-        // Configure the cell...
+        if(indexPath.row % 2 == 0){
+            
+            cell.backgroundColor = UIColor.clearColor()
+            
+        } else {
+            
+            cell.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
+            cell.textLabel?.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.0)
+            
+        }
 
         return cell
     }
-    */
 
-    /*
+
+   
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return NO if you do not want the specified item to be editable.

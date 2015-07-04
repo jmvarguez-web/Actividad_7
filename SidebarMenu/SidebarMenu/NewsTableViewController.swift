@@ -13,6 +13,16 @@ class NewsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.rowHeight = 250
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.backgroundView = UIImageView(image: UIImage(named: "fondo"))
+        if self.revealViewController() != nil {
+            menuButton.target = self.revealViewController()
+            menuButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -41,7 +51,16 @@ class NewsTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsTableViewCell
-
+        if(indexPath.row % 2 == 0){
+            
+            cell.backgroundColor = UIColor.clearColor()
+            
+        } else {
+            
+            cell.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.2)
+            cell.textLabel?.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.0)
+            
+        }
         // Configure the cell...
         if indexPath.row == 0 {
             cell.postImageView.image = UIImage(named: "watchkit-intro")
